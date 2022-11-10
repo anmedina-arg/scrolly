@@ -1,0 +1,8 @@
+.icon {
+  width: 150px;
+  position: fixed;
+  top: 250px;
+  fill: aquamarine;
+  stroke: blue;
+  stroke-width: 1px;
+}

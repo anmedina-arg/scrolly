@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef, useEffect } from "react";
+import { Emoji } from "../src/components/emoji/emoji";
+import Content from "./components/content/content";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const ref = useRef();
+
+  useEffect(() => {
+    const handleScroll = (event) => {
+      console.log("window.scrollY", window.scrollY);
+      if (window.scrollY < 200) {
+        ref.current.style.opacity = 0;
+      } else {
+        ref.current.style.opacity = 1;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="content__section">
+        <Content />
+      </div>
+      <div ref={ref}>
+        <Emoji />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
